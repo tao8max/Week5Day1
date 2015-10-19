@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hidden</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if flash[:info] %>     
+  		   <div class="notice">   
+  			 <%=flash[:info] %>     
+  		   </div>   
+  	<% end %>   
+  
+  <% if flash[:alert] %>     
+  		<div class="alert">  
+  			<%=flash[:alert] %>     
+  		</div>   
+  <% end %>
+
+<h1>Main Menu:</h1>
+<% if current_user %>
+  <%= link_to "Profile", user_path(session[:user_id]) %> - <%= link_to "Users", users_path %> - <%= link_to "Log Out", "/logout" %>
+
+  <%= yield %>
+
+  <%else%>
+  <p>You are not logged in to see the content. Please <%= link_to "SIGN UP", new_user_path %> or <%= link_to "LOG IN", login_form_path %>.</p>
+  <% end %>
+
+
+  
+
+
+</body>
+</html>
