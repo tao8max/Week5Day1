@@ -6,8 +6,9 @@ class UsersController < ApplicationController
 
 	def create
 		User.create params[:user]
-		redirect_to login_form_path
+		redirect_to "/login_form"
 	end
+	
 
 	def show
 		@user=User.find params[:id]
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
 		@user=User.where(email: params[:user][:email]).first
 		if @user && @user.password == params[:user][:password]
 			session[:user_id]=@user.id
-			redirect_to home_path
+			redirect_to user_path(session[:user_id])
 		else
 			flash[:alert]="Wrong email and/or password"
 			redirect_to login_form_path
@@ -42,14 +43,13 @@ class UsersController < ApplicationController
 	def logout
 		if session[:user_id]
 			session[:user_id]=nil
-			redirect_to home_path
+			redirect_to users_path
 		else
-			redirect_to home_path
+			redirect_to users_path
 		end
 	end
 
 	def index
 		@users=User.all
 	end
-end
 end

@@ -23,13 +23,13 @@
 <% if current_user %>
   <%= link_to "Profile", user_path(session[:user_id]) %> - <%= link_to "Users", users_path %> - <%= link_to "Log Out", "/logout" %>
 
-  <%= yield %>
+  
 
   <%else%>
-  <p>You are not logged in to see the content. Please <%= link_to "SIGN UP", new_user_path %> or <%= link_to "LOG IN", login_form_path %>.</p>
+  <p>You are not logged in to see the content. Please <%= link_to "SIGN UP", new_user_path %> or <a href="/login_form">LOG IN</a>.</p>
   <% end %>
 
-
+<%= yield %>
   
 
 
